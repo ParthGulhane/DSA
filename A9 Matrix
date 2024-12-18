@@ -1,0 +1,121 @@
+def matrix_addition(A, B): 
+    if(len(A)==len(B) and len(A[0])==len(B[0])):  
+        result = []
+        for i in range(len(A)):
+            row = []
+            for j in range(len(A[0])):
+                row.append(A[i][j] + B[i][j])
+            result.append(row)
+        return result
+    else:
+         return 0
+
+def matrix_subtraction(A, B):
+    if(len(A)==len(B) and len(A[0])==len(B[0])):
+        result = []
+        for i in range(len(A)):
+            row = []
+            for j in range(len(A[0])):
+                row.append(A[i][j] - B[i][j])
+            result.append(row)
+        return result
+    else:
+         return 0
+
+def matrix_multiplication(A, B):
+    if(len(A[0])==len(B)):
+        result = []
+        for i in range(len(A)):
+            row = []
+            for j in range(len(B[0])):
+                product = 0
+                for k in range(len(A[0])):
+                    product += A[i][k] * B[k][j]
+                row.append(product)
+            result.append(row)
+        return result
+    else:
+        return 0
+
+def matrix_transpose(X):
+    result = []
+    for i in range(len(X[0])):
+        row = []
+        for j in range(len(X)):
+            row.append(X[j][i])
+        result.append(row)
+    return result
+
+def matrix_input():
+    Rows = int(input("Give the number of rows: "))  
+    Columns = int(input("Give the number of columns: "))  
+  
+    matrix = []  
+    print("Please give the entries row-wise:")  
+   
+    for i in range(Rows): 
+        r = []  
+        for j in range(Columns): 
+            r.append(int(input()))  
+        matrix.append(r)  
+  
+    for i in range(Rows):  
+        for j in range(Columns):  
+            print(matrix[i][j], end=" ")  
+        print()
+    return matrix
+      
+A=matrix_input()
+print()
+B=matrix_input()
+print() 
+
+
+addition_result = matrix_addition(A, B)
+print("Addition of A and B:")
+if(addition_result!=0):
+    for i in range(len(addition_result)):  
+            for j in range(len(addition_result[0])):  
+                print(addition_result[i][j], end=" ")  
+            print()
+else:
+     print("Error: Matrix addition is not possible. Number of rows and colums in Matrix A must equal to mumber of rows and colums of Matrix B.")
+print()
+
+subtraction_result = matrix_subtraction(A, B)
+print("Subtraction of A and B:")
+if(subtraction_result!=0):
+    for i in range(len(subtraction_result)):  
+            for j in range(len(subtraction_result[0])):  
+                print(subtraction_result[i][j], end=" ")  
+            print()
+else:
+     print("Error: Matrix subtraction is not possible. Number of rows and colums in Matrix A must equal to mumber of rows and colums of Matrix B.")
+print()
+
+
+multiplication_result = matrix_multiplication(A, B)
+print("Multiplication of A and B:")
+if(multiplication_result!=0):
+    for i in range(len(multiplication_result)):  
+            for j in range(len(multiplication_result[0])):  
+                print(multiplication_result[i][j], end=" ")  
+            print()
+else:
+    print("Error: Matrix multiplication is not possible. Number of columns in Matrix A must equal number of rows in Matrix B.")
+print()
+
+print("Transpose of A is")
+transpose_A = matrix_transpose(A)
+for i in range(len(transpose_A)):  
+        for j in range(len(transpose_A[0])):  
+            print(transpose_A[i][j], end=" ")  
+        print()
+print()
+
+print("Transpose of B is:")
+transpose_B = matrix_transpose(B)
+for i in range(len(transpose_B)):  
+        for j in range(len(transpose_B[0])):  
+            print(transpose_B[i][j], end=" ")  
+        print()
