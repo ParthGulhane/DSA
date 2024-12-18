@@ -2,37 +2,31 @@
 #include <string>
 using namespace std;
 
-// Node structure for each member
 struct Node {
-    int prn;            // Student PRN
-    string name;        // Student name
-    Node* next;         // Pointer to the next node
+    int prn;            
+    string name;        
+    Node* next;         
 
-    // Constructor to initialize a node
     Node(int p, string n) : prn(p), name(n), next(nullptr) {}
 };
 
-// Linked list class for the club
 class PinnacleClub {
 private:
-    Node* head; // Pointer to the president (first node)
-    Node* tail; // Pointer to the secretary (last node)
+    Node* head; 
+    Node* tail;
 
 public:
-    PinnacleClub() : head(nullptr), tail(nullptr) {} // Constructor to initialize an empty list
+    PinnacleClub() : head(nullptr), tail(nullptr) {}
 
-    // Add a new member
     void addMember(int prn, string name, bool isPresident = false, bool isSecretary = false) {
         Node* newMember = new Node(prn, name);
 
-        // Add as president
         if (isPresident) {
             newMember->next = head;
             head = newMember;
             if (tail == nullptr) // If list was empty, set tail to head
                 tail = head;
         }
-        // Add as secretary
         else if (isSecretary) {
             if (tail == nullptr) { // If the list is empty
                 head = tail = newMember;
@@ -41,9 +35,8 @@ public:
                 tail = newMember;
             }
         }
-        // Add as a regular member
         else {
-            if (head == nullptr) { // If the list is empty
+            if (head == nullptr) { 
                 head = tail = newMember;
             } else {
                 newMember->next = head->next;
@@ -52,25 +45,23 @@ public:
         }
     }
 
-    // Delete a member
     void deleteMember(int prn) {
         if (head == nullptr) {
             cout << "The list is empty.\n";
             return;
         }
 
-        // If the member to delete is the president
         if (head->prn == prn) {
             Node* temp = head;
             head = head->next;
             delete temp;
-            if (head == nullptr) // If the list becomes empty
+            if (head == nullptr)
                 tail = nullptr;
             cout << "President removed.\n";
             return;
         }
 
-        // If the member to delete is the secretary
+
         if (tail->prn == prn) {
             Node* temp = head;
             while (temp->next != tail) {
@@ -83,7 +74,6 @@ public:
             return;
         }
 
-        // Deleting a regular member
         Node* current = head;
         while (current->next != nullptr && current->next->prn != prn) {
             current = current->next;
@@ -99,7 +89,6 @@ public:
         }
     }
 
-    // Compute the total number of members
     int countMembers() const {
         int count = 0;
         Node* temp = head;
@@ -110,7 +99,6 @@ public:
         return count;
     }
 
-    // Display all members
     void displayMembers() const {
         if (head == nullptr) {
             cout << "The list is empty.\n";
@@ -125,22 +113,19 @@ public:
         }
     }
 
-    // Concatenate another list to this list
     void concatenate(PinnacleClub& other) {
-        if (head == nullptr) { // If the current list is empty
+        if (head == nullptr) { 
             head = other.head;
             tail = other.tail;
-        } else if (other.head != nullptr) { // If the other list is not empty
+        } else if (other.head != nullptr) { 
             tail->next = other.head;
             tail = other.tail;
         }
 
-        // Clear the other list
         other.head = nullptr;
         other.tail = nullptr;
     }
 
-    // Destructor to free memory
     ~PinnacleClub() {
         Node* temp;
         while (head != nullptr) {
@@ -151,11 +136,9 @@ public:
     }
 };
 
-// Main function
 int main() {
     PinnacleClub divA, divB;
 
-    // Menu-driven program
     int choice, prn;
     string name;
 
