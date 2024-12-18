@@ -1,0 +1,27 @@
+#bubble sort
+def inputscore():
+    n=int(input("Enter number of students: "))
+    score=[]
+    for i in range (n):
+        s=int(input("Enter the score of students: "))
+        score.append(s)
+    print('Score of the student are: ',score)
+    return score
+
+
+def bubblesort(scorelist):
+    for i in range (0,len(scorelist)-1,1):
+        for j in range (0,len(scorelist)-1,1):
+            if (scorelist[j]>scorelist[j+1]):
+                temp=scorelist[j]
+                scorelist[j]=scorelist[j+1]
+                scorelist[j+1]=temp
+    print("Sorted score list is: ",scorelist)
+    top5=[]
+    for i in range (len(scorelist)-1,len(scorelist)-6,-1):
+        top5.append(scorelist[i])
+    print("Top 5 Scores are: ",top5)
+
+list=inputscore()
+bubblesort(list)
+
