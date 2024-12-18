@@ -1,0 +1,22 @@
+#Selection Sort
+score=[]
+n=int(input("Enter number of student: "))
+def inputlist():
+    for i in range (n):
+        element=int(input("Enter the score of student: "))
+        score.append(element)
+    print("Entered scores are: ",score)
+    return score
+
+def selectionsort(list):
+    for i in range (n):
+        min=i
+        for j in range (i+1,n):
+            if list[j]<list[min]:
+                min=j
+            list[i],list[min]=list[min],list[i]
+    print("Sorted score list is: ",list)
+    return list
+
+scorelist=inputlist()
+selectionsort(scorelist)
