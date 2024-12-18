@@ -15,6 +15,7 @@ for i in range(n):
         present=present+1
         sum=sum+marks[i]
 print("Number of present students are: ",present)
+print("Number of absent studenta are: ",absent)
 print("The marks of students are: ",marks)
 avg=(sum/n)
 print("Average Score is: ",avg)
