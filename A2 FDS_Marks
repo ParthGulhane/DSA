@@ -1,35 +1,45 @@
-n=int(input("Enter number of students "))
+n=int(input("Enter number of students: "))
 marks=[]
-sum=0
+sum_marks=0
 present=0
-absent=[]
 absent=0
+
 for i in range(n):
-    mark=input("Enter the marks of students out of 30 if student was absent enter 'A': ")
+    mark=input("Enter the marks of student out of 30. If the student was absent, enter 'A': ")
     if mark=='A':
-        absent=absent+1
+        absent+=1
         marks.append(0)
     else:
         mark=int(mark)
         marks.append(mark)
-        present=present+1
-        sum=sum+marks[i]
-print("Number of present students are: ",present)
-print("Number of absent studenta are: ",absent)
-print("The marks of students are: ",marks)
-avg=(sum/n)
-print("Average Score is: ",avg)
-if present>0:
-    max_marks=marks[0]
-    min_marks=marks[0]
-    for mark in marks:
-        if mark != 0:
-            if mark > max_marks:
-                max_mark=mark
-            if mark< min_marks or min_marks==0:
-                min_marks=mark
-else:
-    max_marks=min_marks=0
+        present+=1
+        sum_marks+=mark
 
-print("Maximum MArks are:- ", max_marks)
-print("Minimum Marks are:- ", min_marks)
+print("\nNumber of present students:", present)
+print("Number of absent students:", absent)
+print("The marks of students are:", marks)
+
+# Calculate average marks (only for present students)
+if present > 0:
+    avg=sum_marks / present
+else:
+    avg = 0
+
+print("Average score is:", avg)
+
+# Find the maximum and minimum marks manually
+if present > 0:
+    max_marks = None
+    min_marks = None
+
+    for mark in marks:
+        if mark != 0:  # Ignore marks for absent students
+            if max_marks is None or mark > max_marks:
+                max_marks = mark
+            if min_marks is None or mark < min_marks:
+                min_marks = mark
+else:
+    max_marks = min_marks = 0
+
+print("Maximum marks are:", max_marks)
+print("Minimum marks are:", min_marks)
