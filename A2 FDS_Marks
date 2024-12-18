@@ -1,0 +1,34 @@
+n=int(input("Enter number of students "))
+marks=[]
+sum=0
+present=0
+absent=[]
+absent=0
+for i in range(n):
+    mark=input("Enter the marks of students out of 30 if student was absent enter 'A': ")
+    if mark=='A':
+        absent=absent+1
+        marks.append(0)
+    else:
+        mark=int(mark)
+        marks.append(mark)
+        present=present+1
+        sum=sum+marks[i]
+print("Number of present students are: ",present)
+print("The marks of students are: ",marks)
+avg=(sum/n)
+print("Average Score is: ",avg)
+if present>0:
+    max_marks=marks[0]
+    min_marks=marks[0]
+    for mark in marks:
+        if mark != 0:
+            if mark > max_marks:
+                max_mark=mark
+            if mark< min_marks or min_marks==0:
+                min_marks=mark
+else:
+    max_marks=min_marks=0
+
+print("Maximum MArks are:- ", max_marks)
+print("Minimum Marks are:- ", min_marks)
