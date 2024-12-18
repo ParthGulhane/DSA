@@ -1,84 +1,47 @@
-def input_percentage():
-    perc = []
-    number_of_students = int(input("Enter the number of Students : "))
-    for i in range(number_of_students):
-        perc.append(float(input("Enter the percentage of Student {0} : ".format(i+1))))
-    return perc
-
-def print_percentage(perc):
-    for i in range(len(perc)):
-        print(perc[i],sep = "\n")
-
-def percentage_partition(perc,start,end):
-    pivot = perc[start]
-    lower_bound = start + 1
-    upper_bound = end
-
-    while True:
-        while lower_bound <= upper_bound and perc[lower_bound] <= pivot:
-            lower_bound += 1
-
-        while lower_bound <= upper_bound and perc[upper_bound] >= pivot:
-            upper_bound -= 1
-
-        if lower_bound <= upper_bound:
-            perc[lower_bound],perc[upper_bound] = perc[upper_bound],perc[lower_bound]
-
-        else:
-            break
-
-
-    perc[start],perc[upper_bound] = perc[upper_bound],perc[start]
-
-    return upper_bound
-
-def Quick_Sort(perc,start,end):
-    while start < end:
-        partition = percentage_partition(perc,start,end)
-        Quick_Sort(perc,start,partition-1)
-        Quick_Sort(perc,partition+1,end)
-        return perc
-
-def display_top_five(perc):
-    print("Top Five Percentages are : ")
-    if len(perc) < 5:
-        start, stop = len(perc) - 1, -1
+def quick_sort(arr):
+    """Function to perform Quick Sort."""
+    if len(arr) <= 1:  # Base case: if array has 1 or 0 elements, it's already sorted
+        return arr
     else:
-        start, stop = len(perc) - 1, len(perc) - 6
+        pivot = arr[0]  # Choose the first element as the pivot
+        less_than_pivot = []  # List for elements smaller than or equal to pivot
+        greater_than_pivot = []  # List for elements greater than pivot
 
-    for i in range(start, stop, -1):
-        print(perc[i],sep = "\n")
+        # Divide the array into two parts using a loop
+        for x in arr[1:]:
+            if x <= pivot:
+                less_than_pivot.append(x)  # Add to less_than_pivot if x <= pivot
+            else:
+                greater_than_pivot.append(x)  # Add to greater_than_pivot if x > pivot
 
-unsorted_percentage = []
-sorted_percentage = []
-flag = 1
+        # Recursively sort the subarrays and combine them with the pivot
+        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
 
-while flag == 1:
-    print("\n--------------------MENU--------------------")
-    print("1. Accept the Percentage of Students")
-    print("2. Display the Percentages of Students")
-    print("3. Perform Quick Sort on the Data")
-    print("4. Exit")
 
-    ch = int(input("Enter your choice (from 1 to 4) : "))
+def display_top_five(arr):
+    """Function to display the top five scores."""
+    n = len(arr)
+    print("Top Five Scores: ")
+    for i in range(max(0, n - 5), n):  # Loop through the last five elements
+        print(arr[i], end=" ")  # Print scores in ascending order
+    print()
 
-    if ch == 1:
-        unsorted_percentage = input_percentage()
 
-    elif ch == 2:
-        print_percentage(unsorted_percentage)
+# Main program
+if __name__ == "__main__":
+    # Input percentages of students
+    n = int(input("Enter the number of students: "))
+    percentages = []
+    for i in range(n):  # Loop to input percentages
+        percent = float(input(f"Enter percentage for student {i + 1}: "))
+        percentages.append(percent)
 
-    elif ch == 3:
-        print("Percentages of Students after performing Quick Sort : ")
-        sorted_percentage = Quick_Sort(unsorted_percentage,0,len(unsorted_percentage)-1)
-        print_percentage(sorted_percentage)
-        a = input("Do you want to display the Top 5 Percentages of Students (yes/no) : ")
-        if a == 'yes':
-            display_top_five(sorted_percentage)
+    # Perform quick sort
+    sorted_percentages = quick_sort(percentages)
+    print("\nSorted Percentages in Ascending Order:")
+    for percent in sorted_percentages:  # Loop to print sorted percentages
+        print(percent, end=" ")
+    print()
 
-    elif ch == 4:
-        print("Thanks for using this program!!")
-        flag = 0
-
-    else:
-        print("Invalid Choice!!")
+    # Display top five scores
+    display_top_five(sorted_percentages)
